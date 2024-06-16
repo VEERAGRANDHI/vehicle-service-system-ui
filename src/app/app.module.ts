@@ -10,6 +10,9 @@ import { VehiclesEntryComponent } from './vehicles/vehicles-entry/vehicles-entry
 import { ServiceListComponent } from './service/service-list/service-list.component';
 import { ServiceCreateComponent } from './service/service-create/service-create.component';
 import {ReactiveFormsModule} from "@angular/forms";
+import {AuthGuard} from "./auth.guard";
+import {AppService} from "./app.service";
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 @NgModule({
   declarations: [
@@ -24,9 +27,10 @@ import {ReactiveFormsModule} from "@angular/forms";
   imports: [
     BrowserModule,
     AppRoutingModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    BrowserAnimationsModule
   ],
-  providers: [],
+  providers: [AppService, AuthGuard],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

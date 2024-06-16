@@ -6,21 +6,31 @@
     </button>
     <div class="collapse navbar-collapse" id="navbarNav">
       <ul class="navbar-nav">
-        <li class="nav-item active">
-          <a class="nav-link" routerLink="/">Home <span class="sr-only">(current)</span></a>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link" routerLinkActive="active text-success font-weight-bold" routerLink="/login">Login</a>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link" routerLinkActive="active text-success font-weight-bold" routerLink="/register">Register</a>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link" routerLinkActive="active text-success font-weight-bold" routerLink="/vehicles-list">Vehicles</a>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link" routerLinkActive="active text-success font-weight-bold" routerLink="/service-list">Services</a>
-        </li>
+
+        <ng-container *ngIf="!isLoggedIn">
+          <li class="nav-item">
+            <a class="nav-link" routerLinkActive="active text-success font-weight-bold" routerLink="/login">Login</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" routerLinkActive="active text-success font-weight-bold" routerLink="/register">Register</a>
+          </li>
+        </ng-container>
+
+        <ng-container *ngIf="isLoggedIn">
+          <li class="nav-item active">
+            <a class="nav-link" routerLink="/">Home <span class="sr-only">(current)</span></a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" routerLinkActive="active text-success font-weight-bold" routerLink="/vehicles-list">Vehicles</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" routerLinkActive="active text-success font-weight-bold" routerLink="/service-list">Services</a>
+          </li>
+          <!-- Logout -->
+          <li class="nav-item">
+            <a class="nav-link" style="cursor: pointer;" (click)="logout()">Logout</a>
+          </li>
+        </ng-container>
       </ul>
     </div>
   </div>

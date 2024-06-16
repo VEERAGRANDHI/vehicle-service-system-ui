@@ -1,4 +1,6 @@
 import { Component } from '@angular/core';
+import { AppService } from './app.service';
+import {Router} from "@angular/router";
 
 @Component({
   selector: 'app-root',
@@ -7,4 +9,18 @@ import { Component } from '@angular/core';
 })
 export class AppComponent {
   title = 'vehicle-service-system';
+  constructor(
+    private appService: AppService,
+    private router: Router,
+  ) {
+  }
+
+  public get isLoggedIn(): boolean {
+    return this.appService.isLoggedIn();
+  }
+
+  logout(): void {
+    this.appService.setToken('');
+    this.router.navigateByUrl('/login');
+  }
 }
