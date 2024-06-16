@@ -1,0 +1,78 @@
+<div class="card mt-3">
+  <div class="card-header font-weight-bold">Add New Vehicle</div>
+  <div class="card-body">
+    <form [formGroup]="vehicleForm" class="container">
+      <div class="row">
+        <!-- Column 1 -->
+        <div class="col">
+          <!-- Vehicle ID -->
+          <div class="form-group">
+            <label for="id">Vehicle ID</label>
+            <input type="text" id="id" class="form-control" formControlName="id">
+          </div>
+
+          <!-- Vehicle Type -->
+          <div class="form-group">
+            <label for="vehicle_type">Vehicle Type</label>
+            <input type="text" id="vehicle_type" class="form-control" formControlName="vehicle_type">
+          </div>
+
+          <!-- Brand -->
+          <div class="form-group">
+            <label for="brand">Brand</label>
+            <input type="text" id="brand" class="form-control" formControlName="brand">
+          </div>
+
+          <!-- Model -->
+          <div class="form-group">
+            <label for="model">Model</label>
+            <input type="text" id="model" class="form-control" formControlName="model">
+          </div>
+
+          <!-- Color -->
+          <div class="form-group">
+            <label for="color">Color</label>
+            <input type="text" id="color" class="form-control" formControlName="color">
+          </div>
+
+          <!-- License Plate -->
+          <div class="form-group">
+            <label for="license_plate">License Plate</label>
+            <input type="text" id="license_plate" class="form-control" formControlName="license_plate">
+          </div>
+        </div>
+
+        <!-- Column 2 -->
+        <div class="col">
+          <!-- Year of Manufacture -->
+          <div class="form-group">
+            <label for="year_of_manufacture">Year of Manufacture</label>
+            <input type="number" id="year_of_manufacture" class="form-control" formControlName="year_of_manufacture">
+          </div>
+
+          <!-- Seating Capacity -->
+          <div class="form-group">
+            <label for="seating_capacity">Seating Capacity</label>
+            <input type="number" id="seating_capacity" class="form-control" formControlName="seating_capacity">
+          </div>
+
+          <!-- Fuel Type -->
+          <div class="form-group">
+            <label for="fuel_type">Fuel Type</label>
+            <input type="text" id="fuel_type" class="form-control" formControlName="fuel_type">
+          </div>
+
+          <!-- Transmission Type -->
+          <div class="form-group">
+            <label for="transmission_type">Transmission Type</label>
+            <input type="text" id="transmission_type" class="form-control" formControlName="transmission_type">
+          </div>
+        </div>
+      </div>
+
+      <!-- Submit Button -->
+      <button type="submit" class="btn btn-primary">Submit</button>
+    </form>
+
+  </div>
+</div>

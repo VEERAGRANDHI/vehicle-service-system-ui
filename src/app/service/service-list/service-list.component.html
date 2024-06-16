@@ -1,0 +1,43 @@
+<div class="d-block mt-2">
+  <div class="d-flex justify-content-between align-items-center mb-2">
+    <h5 class="mb-0">Appointments List!</h5>
+
+    <a class="btn btn-sm btn-success" routerLink="/service-create">Book Appointment</a>
+  </div>
+
+  <div class="table-responsive overflow-scroll">
+    <table class="table table-hover">
+      <thead>
+      <tr>
+        <th>ID</th>
+        <th>Vehicle ID</th>
+        <th>Customer Name</th>
+        <th>Customer Phone</th>
+        <th>Customer Email</th>
+        <th>Appointment Date</th>
+        <th>Appointment Time</th>
+        <th>Service Type</th>
+        <th>Notes</th>
+        <th>Actions</th>
+      </tr>
+      </thead>
+      <tbody>
+      <tr *ngFor="let appointment of appointments">
+        <td>{{appointment.id}}</td>
+        <td>{{appointment.vehicle_id}}</td>
+        <td>{{appointment.customer_name}}</td>
+        <td>{{appointment.customer_phone}}</td>
+        <td>{{appointment.customer_email}}</td>
+        <td>{{appointment.appointment_date}}</td>
+        <td>{{appointment.appointment_time}}</td>
+        <td>{{appointment.service_type}}</td>
+        <td>{{appointment.notes}}</td>
+        <td>
+          <button class="btn btn-primary btn-sm" (click)="editAppointment(appointment.id)">Edit</button>
+          <button class="btn btn-danger btn-sm" (click)="deleteAppointment(appointment.id)">Delete</button>
+        </td>
+      </tr>
+      </tbody>
+    </table>
+  </div>
+</div>
