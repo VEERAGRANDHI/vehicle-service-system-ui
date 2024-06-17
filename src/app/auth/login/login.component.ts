@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import {FormControl, FormGroup, Validators} from "@angular/forms";
 import {Router} from "@angular/router";
 import {AppService} from "../../app.service";
+import {ApiService} from "../../api.service";
 
 @Component({
   selector: 'app-login',
@@ -16,15 +17,20 @@ export class LoginComponent implements OnInit {
   })
   constructor(
     private router: Router,
-    private appService: AppService
+    private appService: AppService,
+    private apiService: ApiService,
   ) { }
 
   ngOnInit(): void {
   }
 
   loginNow() {
-    console.log(this.form.value);
-    this.appService.setToken(`Bearer ${this.form.value.email} ${this.form.value.password}`);
-    this.router.navigateByUrl('/vehicles-list');
+    this.apiService.login(this.form.value).subscribe({
+      next: (res: any) => {
+        this.appService.setToken(res.access_token);
+        this.router.navigateByUrl('/vehicles-list');
+        this.appService.currentUser = res.user;
+      }
+    });
   }
 }

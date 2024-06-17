@@ -1,7 +1,7 @@
 <div class="card mt-3">
   <div class="card-header font-weight-bold">Add New Vehicle</div>
   <div class="card-body">
-    <form [formGroup]="vehicleForm" class="container">
+    <form [formGroup]="vehicleForm" (ngSubmit)="createVehicle()" class="container">
       <div class="row">
         <!-- Column 1 -->
         <div class="col">

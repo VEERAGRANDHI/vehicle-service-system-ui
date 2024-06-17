@@ -1,5 +1,8 @@
 import {Component, OnInit} from '@angular/core';
 import {FormControl, FormGroup} from "@angular/forms";
+import {ApiService} from 'src/app/api.service';
+import {Router} from "@angular/router";
+import {MatSnackBar} from "@angular/material/snack-bar";
 
 @Component({
   selector: 'app-vehicles-entry',
@@ -9,7 +12,11 @@ import {FormControl, FormGroup} from "@angular/forms";
 export class VehiclesEntryComponent implements OnInit {
   vehicleForm: FormGroup;
 
-  constructor() {
+  constructor(
+    private apiService: ApiService,
+    private router: Router,
+    private snackBar: MatSnackBar,
+  ) {
     this.vehicleForm = new FormGroup({
       id: new FormControl(''), // Vehicle ID
       vehicle_type: new FormControl(''), // Type of the vehicle (Car, Bike, Truck, etc.)
@@ -29,4 +36,21 @@ export class VehiclesEntryComponent implements OnInit {
   ngOnInit(): void {
   }
 
+  createVehicle() {
+    this.apiService.createVehicle(this.vehicleForm.value).subscribe({
+      next: (data) => {
+        console.log(data);
+        this.snackBar.open('Vehicle created successfully', 'Close', {
+          duration: 2000,
+        });
+        this.router.navigateByUrl('/vehicles-list');
+      },
+      error: (error) => {
+        console.log(error);
+        this.snackBar.open('Error creating vehicle', 'Close', {
+          duration: 2000,
+        });
+      }
+    });
+  }
 }

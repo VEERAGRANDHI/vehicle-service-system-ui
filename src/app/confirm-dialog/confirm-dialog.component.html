@@ -1,0 +1,8 @@
+<!-- Confirm dialog template with Confirm and close -->
+<div class="d-block">
+    <h1 mat-dialog-title>{{ data?.title }}</h1>
+    <div mat-dialog-actions>
+      <button class="btn btn-success mr-2" [mat-dialog-close]="true">Confirm</button>
+      <button class="btn btn-default" [mat-dialog-close]="false">Close</button>
+    </div>
+</div>

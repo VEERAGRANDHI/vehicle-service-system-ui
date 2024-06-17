@@ -1,38 +1,51 @@
 <div class="d-block mt-2">
   <div class="d-flex justify-content-between align-items-center mb-2">
-    <h5 class="mb-0">Vehicles List!</h5>
+    <h4 class="mb-0 font-weight-bold">Vehicles List!</h4>
 
     <a class="btn btn-sm btn-success" routerLink="/vehicles-entry">Add New Vehicle</a>
   </div>
 
-  <table class="table table-hover">
-    <thead class="thead-light">
+  <table class="table table-hover table-bordered">
+    <thead>
     <tr>
-      <th scope="col">#</th>
-      <th scope="col">First</th>
-      <th scope="col">Last</th>
-      <th scope="col">Handle</th>
+      <th>ID</th>
+      <th>Vehicle Type</th>
+      <th>Brand</th>
+      <th>Model</th>
+      <th>Color</th>
+      <th>License Plate</th>
+      <th>Year of Manufacture</th>
+      <th>Seating Capacity</th>
+      <th>Fuel Type</th>
+      <th>Transmission Type</th>
+      <!--Edit and delete-->
+      <th>Actions</th>
     </tr>
     </thead>
     <tbody>
-    <tr>
-      <th scope="row">1</th>
-      <td>Mark</td>
-      <td>Otto</td>
-      <td>@mdo</td>
-    </tr>
-    <tr>
-      <th scope="row">2</th>
-      <td>Jacob</td>
-      <td>Thornton</td>
-      <td>@fat</td>
-    </tr>
-    <tr>
-      <th scope="row">3</th>
-      <td>Larry</td>
-      <td>the Bird</td>
-      <td>@twitter</td>
+    <tr *ngFor="let vehicle of vehiclesList">
+      <td>{{ vehicle.id }}</td>
+      <td>{{ vehicle.vehicle_type }}</td>
+      <td>{{ vehicle.brand }}</td>
+      <td>{{ vehicle.model }}</td>
+      <td>{{ vehicle.color }}</td>
+      <td>{{ vehicle.license_plate }}</td>
+      <td>{{ vehicle.year_of_manufacture }}</td>
+      <td>{{ vehicle.seating_capacity }}</td>
+      <td>{{ vehicle.fuel_type }}</td>
+      <td>{{ vehicle.transmission_type }}</td>
+      <td>
+        <button class="btn btn-primary btn-xs mr-1" (click)="editVehicle(vehicle)">
+          <!-- font awesome 4 edit icon -->
+          <i class="fa fa-edit"></i>
+        </button>
+        <button class="btn btn-danger btn-xs" (click)="deleteVehicle(vehicle.id)">
+          <!-- font awesome 4 delete icon -->
+          <i class="fa fa-trash"></i>
+        </button>
+      </td>
     </tr>
     </tbody>
   </table>
+
 </div>

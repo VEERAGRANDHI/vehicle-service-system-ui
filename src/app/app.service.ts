@@ -4,9 +4,9 @@ import { Injectable } from '@angular/core';
   providedIn: 'root'
 })
 export class AppService {
-
   constructor() { }
 
+  public currentUser: any = null;
   public isLoggedIn(): boolean {
     return !!localStorage.getItem('AUTH_TOKEN');
   }

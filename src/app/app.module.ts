@@ -13,6 +13,13 @@ import {ReactiveFormsModule} from "@angular/forms";
 import {AuthGuard} from "./auth.guard";
 import {AppService} from "./app.service";
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import {HTTP_INTERCEPTORS, HttpClientModule} from "@angular/common/http";
+import {HttpInterceptorService} from "./http-interceptor.service";
+import {ApiService} from "./api.service";
+import {MAT_SNACK_BAR_DEFAULT_OPTIONS, MatSnackBarModule} from "@angular/material/snack-bar";
+import {MatDialogModule} from "@angular/material/dialog";
+import { ConfirmDialogComponent } from './confirm-dialog/confirm-dialog.component';
+import {MatIconModule} from "@angular/material/icon";
 
 @NgModule({
   declarations: [
@@ -22,15 +29,40 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
     VehiclesListComponent,
     VehiclesEntryComponent,
     ServiceListComponent,
-    ServiceCreateComponent
+    ServiceCreateComponent,
+    ConfirmDialogComponent
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
     ReactiveFormsModule,
-    BrowserAnimationsModule
+    BrowserAnimationsModule,
+    HttpClientModule,
+    MatSnackBarModule,
+    MatDialogModule,
+    MatIconModule
   ],
-  providers: [AppService, AuthGuard],
+  providers: [
+    AppService,
+    ApiService,
+    AuthGuard,
+    // Inject HTTP interceptors here
+    {
+      provide: HTTP_INTERCEPTORS,
+      useClass: HttpInterceptorService,
+      multi: true
+    },
+    // Default matSnackBar config
+    {
+      provide: MAT_SNACK_BAR_DEFAULT_OPTIONS,
+      useValue: {
+        duration: 3000,
+        horizontalPosition: 'center',
+        verticalPosition: 'top',
+        panelClass: ['mat-toolbar','mat-primary']
+      }
+    }
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
