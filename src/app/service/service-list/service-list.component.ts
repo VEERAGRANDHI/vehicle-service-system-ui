@@ -1,5 +1,9 @@
 import {Component, OnInit} from '@angular/core';
+import { ApiService } from 'src/app/api.service';
 import {ServiceList} from "../../helper/service.helper";
+import {MatDialog} from "@angular/material/dialog";
+import {ConfirmDialogComponent} from "../../confirm-dialog/confirm-dialog.component";
+import {MatSnackBar} from "@angular/material/snack-bar";
 
 @Component({
   selector: 'app-service-list',
@@ -7,39 +11,53 @@ import {ServiceList} from "../../helper/service.helper";
   styleUrls: ['./service-list.component.scss']
 })
 export class ServiceListComponent implements OnInit {
-  public appointments = ServiceList;
+  public appointments: any[] = [];
 
-  constructor() {
+  constructor(
+    private apiService: ApiService,
+    private dialog: MatDialog,
+    private snackBar: MatSnackBar,
+  ) {
   }
 
   ngOnInit(): void {
+    this.getAppointments();
   }
 
-  editAppointment(id: number) {
-    // Find the appointment by id
-    const appointment = this.appointments.find(appointment => appointment.id === id);
 
-    if (appointment) {
-      // Logic to edit the appointment
-      // This could involve navigating to a different page with the appointment data
-      console.log(`Editing appointment with ID: ${id}`);
-    } else {
-      console.log(`Appointment with ID: ${id} not found`);
-    }
+  getAppointments() {
+    this.apiService.getAppointments().subscribe({
+      next: (response: any) => {
+        this.appointments = response || [];
+      },
+      error: (error) => {
+        console.log(error);
+      }
+    });
   }
 
   deleteAppointment(id: number) {
-    // Find the index of the appointment with the given id
-    const index = this.appointments.findIndex(appointment => appointment.id === id);
-
-    if (index !== -1) {
-      // Remove the appointment from the array
-      this.appointments.splice(index, 1);
-
-      // Logic to delete the appointment from the server
-      console.log(`Deleting appointment with ID: ${id}`);
-    } else {
-      console.log(`Appointment with ID: ${id} not found`);
-    }
+    this.dialog.open(ConfirmDialogComponent, {
+      data: {
+        title: 'Are you sure you want to delete this appointment?',
+      }
+    }).afterClosed().subscribe(result => {
+      if (result) {
+        this.apiService.deleteAppointment(id).subscribe({
+          next: (response: any) => {
+            this.snackBar.open('Appointment deleted successfully', 'OK', {
+              duration: 2000,
+            });
+            this.getAppointments();
+          },
+          error: (error) => {
+            console.log(error);
+            this.snackBar.open('Error deleting appointment', 'OK', {
+              duration: 2000,
+            });
+          }
+        });
+      }
+    })
   }
 }

@@ -1,7 +1,15 @@
 <div class="card mt-3">
-  <div class="card-header font-weight-bold">Add New Vehicle</div>
+  <div class="card-header font-weight-bold">
+    <ng-container *ngIf="queryParams && queryParams['id']; else addNew">
+      Update Vehicle
+    </ng-container>
+
+    <ng-template #addNew>
+      Add New Vehicle
+    </ng-template>
+  </div>
   <div class="card-body">
-    <form [formGroup]="vehicleForm" (ngSubmit)="createVehicle()" class="container">
+    <form [formGroup]="vehicleForm" (ngSubmit)="actionOnVehicle()" class="container">
       <div class="row">
         <!-- Column 1 -->
         <div class="col">

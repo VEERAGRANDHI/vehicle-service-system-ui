@@ -35,10 +35,10 @@
       <td>{{ vehicle.fuel_type }}</td>
       <td>{{ vehicle.transmission_type }}</td>
       <td>
-        <button class="btn btn-primary btn-xs mr-1" (click)="editVehicle(vehicle)">
+        <a [routerLink]="['/vehicles-entry']" [queryParams]="{id: vehicle.id}" class="btn btn-primary btn-xs mr-1">
           <!-- font awesome 4 edit icon -->
           <i class="fa fa-edit"></i>
-        </button>
+        </a>
         <button class="btn btn-danger btn-xs" (click)="deleteVehicle(vehicle.id)">
           <!-- font awesome 4 delete icon -->
           <i class="fa fa-trash"></i>

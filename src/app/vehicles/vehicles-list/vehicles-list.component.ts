@@ -34,31 +34,6 @@ export class VehiclesListComponent implements OnInit {
     })
   }
 
-  editVehicle(vehicle: any) {
-    /*Confirmation*/
-    this.dialog.open(ConfirmDialogComponent, {
-      data: {
-        id: vehicle.id,
-        title: `Are you sure you want to edit this vehicle?`
-      }
-    }).afterClosed().subscribe(result => {
-      if (result === true) {
-        console.log(vehicle);
-        this.apiService.updateVehicle(vehicle.id, vehicle).subscribe({
-          next: (response: any) => {
-            console.log(response);
-            this.getVehiclesList();
-            this.snackBar.open('Vehicle updated successfully', 'Close', {});
-          },
-          error: (error) => {
-            console.log(error);
-            this.snackBar.open('Something went wrong', 'Close', {});
-          }
-        })
-      }
-    })
-  }
-
   deleteVehicle(id: number) {
     this.dialog.open(ConfirmDialogComponent, {
       data: {

@@ -6,7 +6,7 @@
   </div>
 
   <div class="table-responsive overflow-scroll">
-    <table class="table table-hover">
+    <table class="table table-hover table-bordered">
       <thead>
       <tr>
         <th>ID</th>
@@ -33,8 +33,14 @@
         <td>{{appointment.service_type}}</td>
         <td>{{appointment.notes}}</td>
         <td>
-          <button class="btn btn-primary btn-sm" (click)="editAppointment(appointment.id)">Edit</button>
-          <button class="btn btn-danger btn-sm" (click)="deleteAppointment(appointment.id)">Delete</button>
+          <!-- Same as vehicles list tempalte, edit and delete -->
+          <a class="btn btn-success btn-xs mr-1" routerLink="/service-create" [queryParams]="{id: appointment.id}">
+            <i class="fa fa-edit"></i>
+          </a>
+
+          <button class="btn btn-xs btn-danger" (click)="deleteAppointment(appointment.id)">
+            <i class="fa fa-trash"></i>
+          </button>
         </td>
       </tr>
       </tbody>

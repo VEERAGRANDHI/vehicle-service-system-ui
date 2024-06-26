@@ -3,6 +3,7 @@ import {FormControl, FormGroup, Validators} from "@angular/forms";
 import {Router} from "@angular/router";
 import {AppService} from "../../app.service";
 import {ApiService} from "../../api.service";
+import {MatSnackBar} from "@angular/material/snack-bar";
 
 @Component({
   selector: 'app-login',
@@ -19,6 +20,7 @@ export class LoginComponent implements OnInit {
     private router: Router,
     private appService: AppService,
     private apiService: ApiService,
+    private snackBar: MatSnackBar,
   ) { }
 
   ngOnInit(): void {
@@ -30,6 +32,15 @@ export class LoginComponent implements OnInit {
         this.appService.setToken(res.access_token);
         this.router.navigateByUrl('/vehicles-list');
         this.appService.currentUser = res.user;
+        this.appService.setCurrentUserId(res.user.id);
+        this.snackBar.open('Logged in successfully', '', {
+          duration: 2000,
+        });
+      },
+      error: (err) => {
+        this.snackBar.open(err.error.message, '', {
+          duration: 2000,
+        });
       }
     });
   }

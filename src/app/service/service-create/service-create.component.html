@@ -2,14 +2,19 @@
   <div class="card">
     <div class="card-header">Book An Appointment</div>
     <div class="card-body">
-      <form [formGroup]="appointmentForm" class="container">
+      <form [formGroup]="appointmentForm" (ngSubmit)="actionOnAppointment()" class="container">
         <div class="row">
           <!-- Column 1 -->
           <div class="col">
             <!-- Vehicle ID -->
             <div class="form-group">
               <label for="vehicle_id">Vehicle ID</label>
-              <input type="text" id="vehicle_id" class="form-control" formControlName="vehicle_id" required>
+              <!--<input type="text" id="vehicle_id" class="form-control" formControlName="vehicle_id" required>-->
+              <select class="form-control" formControlName="vehicle_id" id="vehicle_id">
+                <option *ngFor="let vehicle of vehiclesList" [ngValue]="vehicle.id">
+                  {{ vehicle.license_plate }} - {{ vehicle.brand }} - {{ vehicle.model }}
+                </option>
+              </select>
               <div *ngIf="appointmentForm.controls['vehicle_id']?.invalid && (appointmentForm.controls['vehicle_id']?.dirty || appointmentForm.controls['vehicle_id']?.touched)" class="text-danger">
                 Vehicle ID is required.
               </div>

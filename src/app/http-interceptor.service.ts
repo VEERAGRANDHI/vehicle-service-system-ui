@@ -11,7 +11,7 @@ export class HttpInterceptorService implements HttpInterceptor {
   constructor(private appService: AppService) { }
 
   intercept(req: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
-    const TOKEN = this.appService.isLoggedIn(); // Replace with your actual token
+    const TOKEN = this.appService.getToken(); // Replace with your actual token
     const clonedReq = req.clone({
       headers: req.headers.set('Authorization', `Bearer ${TOKEN}`).set('Accept', 'application/json')
     });

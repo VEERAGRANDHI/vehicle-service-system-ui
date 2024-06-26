@@ -20,6 +20,7 @@ import {MAT_SNACK_BAR_DEFAULT_OPTIONS, MatSnackBarModule} from "@angular/materia
 import {MatDialogModule} from "@angular/material/dialog";
 import { ConfirmDialogComponent } from './confirm-dialog/confirm-dialog.component';
 import {MatIconModule} from "@angular/material/icon";
+import {MatMenuModule} from "@angular/material/menu";
 
 @NgModule({
   declarations: [
@@ -40,7 +41,8 @@ import {MatIconModule} from "@angular/material/icon";
     HttpClientModule,
     MatSnackBarModule,
     MatDialogModule,
-    MatIconModule
+    MatIconModule,
+    MatMenuModule
   ],
   providers: [
     AppService,

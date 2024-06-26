@@ -26,9 +26,17 @@
           <li class="nav-item">
             <a class="nav-link" routerLinkActive="active text-success font-weight-bold" routerLink="/service-list">Services</a>
           </li>
-          <!-- Logout -->
-          <li class="nav-item">
-            <a class="nav-link" style="cursor: pointer;" (click)="logout()">Logout</a>
+
+
+          <li class="nav-item" style="cursor:pointer;" *ngIf="appService?.currentUser as user" [matMenuTriggerFor]="menu">
+            <a class="nav-link text-danger" style="cursor:pointer;">
+              <span class="text-dark">Logged In As: </span>
+              <span class="text-danger font-weight-bold">{{user.firstName}} {{user.lastName}}</span>
+            </a>
+
+            <mat-menu #menu="matMenu">
+              <a class="nav-link" style="cursor: pointer;" (click)="logout()">Logout</a>
+            </mat-menu>
           </li>
         </ng-container>
       </ul>

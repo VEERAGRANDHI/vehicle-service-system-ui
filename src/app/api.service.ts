@@ -14,6 +14,10 @@ export class ApiService {
     private appService: AppService
   ) { }
 
+  getUsers(id: number) {
+    return this.httpClient.get(`${API_URL}/users/${id}`);
+  }
+
   login(data: any) {
     return this.httpClient.post(`${API_URL}/login`, data);
   }
