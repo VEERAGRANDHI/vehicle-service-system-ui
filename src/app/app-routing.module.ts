@@ -4,8 +4,6 @@ import {LoginComponent} from "./auth/login/login.component";
 import {RegisterComponent} from "./auth/register/register.component";
 import {VehiclesListComponent} from "./vehicles/vehicles-list/vehicles-list.component";
 import {VehiclesEntryComponent} from "./vehicles/vehicles-entry/vehicles-entry.component";
-import {ServiceListComponent} from "./service/service-list/service-list.component";
-import {ServiceCreateComponent} from "./service/service-create/service-create.component";
 import {AuthGuard} from "./auth.guard";
 import {LoggedInGuard} from "./logged-in.guard";
 
@@ -29,16 +27,6 @@ const routes: Routes = [
     path: 'vehicles-entry',
     canActivate: [AuthGuard],
     component: VehiclesEntryComponent
-  },
-  {
-    path: 'service-list',
-    canActivate: [AuthGuard],
-    component: ServiceListComponent
-  },
-  {
-    path: 'service-create',
-    canActivate: [AuthGuard],
-    component: ServiceCreateComponent
   },
   {
     path: '**',
